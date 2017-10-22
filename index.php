@@ -9,29 +9,25 @@
     <script src="https://www.google.com/jsapi"></script>
     <script src="js/Chart.bundle.js"></script>
     <script src="js/graph.js"></script>
-    <?php include 'C:\Users\Adam\Web\php.php'; ?>
+    <?php include 'C:\Users\Adam\Web\php.php' ?>
 </head>
 
 <body>
-    
-    <div>
-
-	</div>
-	
+    	
     <div class="header">
     	Headphone <br> Recommender
     </div>
-    
-    <div class="top">
-    	<img src="images/headphones.png" alt="The Stax L700, Audeze LCD-3, and Sennheiser HD800" style="float: right; width: 940px; width: 50vw;">
+        
+    <div style="margin-left: 48px; margin-right: 48px;">
+    <div class="top-text">
     	<div class="intro">
 	    	<br>
-	    	<h1 style="font-size: 38px; font-style: bold">What if you could find the perfect headphone using frequency response alone?</h1>
+	    	<h1 style="font-size: 34px; font-style: bold">What if you could find the perfect headphone using frequency response alone?</h1>
 	    	<br>
-	    	<h3 style="padding: 8px 0px 8px 0px; border-bottom: 12px groove #72758e; border-top: 12px groove #72758e;">
+	    	<h3 style="padding: 8px 0px 8px 0px; border-bottom: 10px groove #72758e; border-top: 10px groove #72758e;">
 	    	<b>Well now you can!</b><br> 
 	    	Whether you're a newcomer to the hobby (with experience with at least one headphone on the list)
-	    	or a headphone connoisseur who falls asleep to sine wave sweeps, this tool can help <i>you</i> find the perfect headphone!
+	    	or a headphone connoisseur who falls asleep to sine wave sweeps, this tool can help <i>you</i> to find the perfect headphone!
 	    	<br>
 	    	</h3>
 	    </div>
@@ -40,7 +36,7 @@
 	        <h1 style="text-shadow: 1px 1px #72758e;"><i>How It Works:</i></h1>
 	    	<h3 style="text-indent: 2em;">Using the massive database of headphones available on
 	    	<a href="http://www.Innerfidelity.com" style="color: white">Innerfidelity.com</a>, this web app allows you to
-	    	find new headphones by modifying the frequency response graphs of headphones you already know.
+	    	find new headphones by modifying the frequency resonse graphs of headphones you already know.
 	    	</h3>
 	    	<br>
 	    	<h1 style="text-shadow: 1px 1px #72758e;"><i>Instructions:</i></h1>
@@ -49,8 +45,9 @@
 	    	Finally, select the type of headphone you're looking for and click the button at the bottom of the page to find the closest matches.
 	    	</h3>
     	</div>
+		<br>
     </div>
-
+	<img src="images/headphones.png" alt="The Stax L700, Audeze LCD-3, and Sennheiser HD800" style="display: inline-block;">
 
     
     <br><br><br>
@@ -62,7 +59,7 @@
     <div class="graphSide">
     
     	<br>
-    	<h2 style="line-height: 34px;">Preloaded Frequency Responses:</h2>
+    	<h2 style="line-height: 32px;">Preloaded Frequency<br>Responses:</h2>
     	<br>
     	<select id="headphone" onchange="loadHeadphone(this.value)" style="width:310px">
 			<option value="default"></option>
@@ -222,7 +219,7 @@
         
         
 	<br><br><br><br><br>
-
+    </div>
 </body>
 
 </html>
