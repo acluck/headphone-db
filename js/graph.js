@@ -142,7 +142,7 @@ function loadHeadphone(headphoneNumber) {
 	config.data.datasets.forEach(function(dataset) {
         for (var i = 0; i < dataset.data.length; i++) {
         	var val = headphones[headphoneNumber].dBVals[i];
-        	val = boundVal(val);
+        	val = cleanNumber(val);
         	dataset.data[i].y = val;
         	document.getElementById('' + FREQUENCIES[i] + 'hz').value = val;
         };
@@ -150,17 +150,19 @@ function loadHeadphone(headphoneNumber) {
     myLine.update();
 }
 
-function ensureNumber(element) {
-	var val = parseFloat(element.value);
+function ensureInt(element) {
+	var val = parseInt(element.value);
 	if (isNaN(val)) {
 		element.value = 0;
 	}
-	else {
-		element.value = val.toFixed(2);
-	}
 }
 
-function boundVal(val) {
+function cleanNumber(number) {
+	var val = parseFloat(number);
+	if (isNaN(val)) {
+		val = 0.00;
+	}
+	val = val.toFixed(2);
 	if (val > 20) {
 		val = 20.00;
 	} else if (val < -50) {
@@ -223,10 +225,8 @@ function updateFrequencySelect() {
 function manualUpdate() {
     config.data.datasets.forEach(function(dataset) {
         for (var i = 0; i < dataset.data.length; i++) {
-        	ensureNumber(document.getElementById('' + FREQUENCIES[i] + 'hz'));
         	var val = document.getElementById('' + FREQUENCIES[i] + 'hz').value;
-        	val = boundVal(val);
-        	ensureNumber(val);
+        	val = cleanNumber(val);
         	dataset.data[i].y = val;
         	document.getElementById('' + FREQUENCIES[i] + 'hz').value = val;
         };
@@ -240,14 +240,13 @@ function quickUpdate() {
     	if (operator != '+' && operator != '-') {
     		return;
     	}
-    	ensureNumber(document.getElementById('customAmount'));
     	var combineVal = document.getElementById('customAmount').value;
+    	combineVal = cleanNumber(combineVal);
     	for (var i = 0; i < FREQUENCIES.length; i++) {
     		if (document.getElementById('' + FREQUENCIES[i] + 'box').checked) {
     			var oldVal = dataset.data[i].y;
     			var newVal = eval('' + oldVal + ' ' + operator +  ' ' + combineVal);
-    			newVal = boundVal(newVal);
-    			newVal = newVal.toFixed(2);
+    			newVal = cleanNumber(newVal);
     			dataset.data[i].y = newVal;
             	document.getElementById('' + FREQUENCIES[i] + 'hz').value = newVal;
     		}
@@ -257,6 +256,7 @@ function quickUpdate() {
 }
 
 function reset() {
+	document.getElementById('headphone').value = 'default';
     config.data.datasets.forEach(function(dataset) {
         for (var i = 0; i < dataset.data.length; i++) {
         	dataset.data[i].y = 0;
@@ -345,9 +345,9 @@ function displayHeadphones(headphones) {
 		var choiceNum = i + 1;
 		var slide = document.createElement('div');
 		slide.className = 'slide';
-		slide.innerHTML = '<h4> Match #' + choiceNum + ': </h4> <h5> ' + '<a href="http://www.google.com/search?q=' + headphones[i].name + '" style="color: white">' + headphones[i].name + '</a> <br> </h5>' +
-							'<h4> Type: </h4> <h5> ' + headphones[i].type + '<br> </h5>' +
-							'<h4>Measurements: </h4> <h5> <br> <a href="' + headphones[i].url + '" style="color: white; font-size: 32px">' + headphones[i].url + '</a> </h5>';
+		slide.innerHTML = '<h4> Match #' + choiceNum + ': </h4> <h5> ' + '<a href="http://www.google.com/search?q=' + headphones[i].name + '" style="color: white">' + headphones[i].name + '</a> </h5>' +
+							'&emsp; &emsp; <h4> Type: </h4> <h5> ' + headphones[i].type + '<br> </h5>' +
+							'<h4> Measurements: </h4> <br> <h5> <a href="' + headphones[i].url + '" style="color: white; font-size: 1em">' + headphones[i].url + '</a> </h5>';
 		slideshow.appendChild(slide);
 	}
 	slideshow.style.display = 'inline-block';
